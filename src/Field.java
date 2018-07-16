@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class Field {
@@ -24,15 +25,30 @@ public class Field {
         return matrix;
     }
 
+    public Integer getValue(int x, int y) {
+        if (x >= 0 && x < width && y >= 0 && y < height) {
+            return matrix[y][x];
+        }
+        return null;
+    }
+
+    public void setValue(int x, int y, int value) {
+        if (x >= 0 && x < width && y >= 0 && y < height) {
+            matrix[y][x] = value;
+        }
+    }
+
     public void print() {
         int[][] canvas = new int[height][width];
 
+        //Копируем "матрицу поля" в массив
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 canvas[i][j] = matrix[i][j];
             }
         }
 
+        //Копируем фигурку в массив, только непустые клетки
         int left = Tetris.game.getFigure().getX();
         int top = Tetris.game.getFigure().getY();
         int[][] brickMatrix = Tetris.game.getFigure().getMatrix();
@@ -61,6 +77,7 @@ public class Field {
             }
             System.out.println();
         }
+
         System.out.println();
         System.out.println();
     }
@@ -70,7 +87,6 @@ public class Field {
 
         for (int i = 0; i < height; i++) {
             int count = 0;
-
             for (int j = 0; j < width; j++) {
                 count += matrix[i][j];
             }
@@ -85,12 +101,4 @@ public class Field {
 
         matrix = lines.toArray(new int[height][width]);
     }
-
-    public Integer getValue(int x, int y) {
-        return 1;
-    }
-
-    public void setValue(int x, int y, int value) {
-    }
 }
-
